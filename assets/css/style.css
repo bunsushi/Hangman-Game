@@ -16,18 +16,19 @@ h1, h3 {
 .navbar {
     margin-bottom: 0;
     font-family: 'Space Mono', monospace;
-    font-weight: bold;
-    letter-spacing: 5px;
+    font-weight: 100;
+    letter-spacing: 8px;
     /* -webkit-transform: rotate(1deg); /* Safari */    
     /* transform: rotate(1deg); */
 }
 
 .nav-tabs {
-    margin-right: 50px;
+    margin-right: 20px;
+    border-bottom: none;
 }
 
 .nav-tabs li.active {
-    margin: 0 20px;
+    margin: 0 10px;
 }
 
 .nav-tabs li.active a {
@@ -71,11 +72,54 @@ h1, h3 {
 
 /* Game Hangman Panel */
 .hangman-paper {
-    background-color: white;
-    height: 600px;
+    width: 90%;
+    /* height: 90%; */
+    margin: 0 auto;
+    padding: 6px 5px 4px 42px;
+    position: relative;
+    color: #000;
+    text-align: center;
+    line-height: 20px;
+    border: 1px solid #d2d2d2;
+    background: #fff;
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
+    background: -webkit-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+    background: -moz-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+    background: -ms-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+    background: -o-linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+    background: linear-gradient(top, #d9eaf3 0%, #fff 8%) 0 4px;
+    -webkit-background-size: 100% 20px;
+    -moz-background-size: 100% 20px;
+    -ms-background-size: 100% 20px;
+    -o-background-size: 100% 20px;
+    background-size: 100% 20px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    /* -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.07); */
+    /* -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.07); */
+    height: 650px;
     margin-top: 20px;
     -webkit-transform: rotate(2deg); /* Safari */
     transform: rotate(2deg);
+    box-shadow: 10px 10px 17px rgba(33, 33, 33, .7);    
+}
+
+.hangman-paper:before {
+    content: '';
+    position: absolute;
+    width: 6px;
+    top: 0;
+    left: 50px;
+    bottom: 0;
+    border: 1px solid;
+    border-color: transparent #efe4e4;
+}
+
+.hangman-paper img {
+    width: 75%;
+    margin-top: 20px;
 }
 
 /* Game Sticky Note Panel */
@@ -84,17 +128,16 @@ h1, h3 {
     border: 1px dashed white;
     background: #ffffcc;
     color: #000;
-    max-width: 700px;
-    width: 555px;
-    height: 500px;
+    width: 100%;
+    height: 400px;
     -webkit-transform: rotate(-4deg); /* Safari */
     transform: rotate(-4deg);
     box-shadow: 15px 15px 17px rgba(33, 33, 33, .7);
     margin-top: 40px;
 }
 
-/* Styles for puzzle letters */
-.box {
+/* Puzzle Letter */
+.underscore {
     display: inline-block;
     text-align: center;
     font-size: 16pt;

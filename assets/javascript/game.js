@@ -35,14 +35,14 @@ function newPuzzle() {
     for (var i=0; i < randomWord.length; i++) {
         //Creates a "div" with the variable letter
         var letter = document.createElement('div');
-        //Assigns ID to box
+        //Assigns ID to underscore
         letter.id = 'letter' + i;
-        //Assigns class "box" to spaces
+        //Assigns class "underscore" to spaces
         if (randomWord[i] == ' ')
-        letter.className = 'box';
-        //Assings classes "box" and "letter" to letter characters in a string
+        letter.className = 'underscore';
+        //Assings classes "underscore" and "letter" to letter characters in a string
         else
-        letter.className = 'box letter';
+        letter.className = 'underscore letter';
         //Displays letter
         letter.innerHTML = randomWord[i];
         //Generates divs for every string in the array solarSystemItems
