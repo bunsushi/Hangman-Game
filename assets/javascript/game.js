@@ -19,48 +19,47 @@ var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 // Chooses a random word from the array planets
 var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
-var userGuesses = 10; // Max number of guesses
+// Global variables
+var maxGuesses = 10; //Max number of guesses
+var userGuesses = 0; // Number of remaining guesses
 var wins = 0; // How many wins the player has
 var losses = 0;
 var puzzle = []; // Empty array stores player guesses
 var x;
+
+// Get elements
+var totalGuesses = document.getElementById('guessesRemaining');
+var currentWins = document.getElementById('totalWins');
+var currentLosses = document.getElementById('totalLosses');
 
 // Start game creates alphabet buttons
 function startGame() {
 
     var playerGuesses = document.getElementById('playerGuesses');
     var usedGuesses = document.getElementById('usedGuesses');
+    // var totalGuesses = document.getElementById('guessesRemaining');
 
+
+    userGuesses = maxGuesses;
+
+    totalGuesses.innerHTML = 'T-' + userGuesses;
+    currentWins.innerHTML = wins;
+    currentLosses.innerHTML = losses;
+
+    makeAlphabet();
+    newPuzzle();
+    
+}
+
+// Generate alphabet buttons
+function makeAlphabet () {
     for (var i = 0; i < alphabet.length; i++) {
         var l = document.createElement('div');
         l.innerHTML = alphabet[i];
         l.className = 'btnLetter';
-        // l.onclick = function(){selectLetter(this); };
         playerGuesses.appendChild(l);
     }
 }
-
-// Select letter hides alphabet button and generates player's guess under 'Your Guesses'
-// function selectLetter(selected){
-//     selected.style.visibility = 'hidden';
-
-//     var l = document.createElement('div');
-//     l.innerHTML = selected.innerHTML;
-//     l.className = 'lblUsed';
-//     usedGuesses.appendChild(l);
-
-//     var guess = selected.innerHTML;
-//     for (var i = 0; i < randomWord.length; i++) {
-//         if (randomWord[i] == guess) document.getElementById('letter'+i).innerHTML = guess;
-//     }
-
-//     var current = '';
-//     for (var i=0; i < randomWord.length; i++) {
-//         if (document.getElementById('letter'+i).innerHTML == '') current += ' ';
-//         else current += document.getElementById('letter'+i).innerHTML;
-//     }
-//     if(current == randomWord) alert('Genius!'); //change alert to +1 on wins column and maybe reset
-// }
 
 // Generates blank underscores for a randomly selected puzzle word
 function newPuzzle() {
@@ -72,47 +71,35 @@ function newPuzzle() {
 }
 
 // Type puzzle
+// ! Restrict input to alphabet letters only!
 document.onkeydown = function(input) {
         var typeGuess = input.key.toUpperCase();
-        // console.log(typeGuess);
-        // var usedGuesses = document.getElementById("usedGuesses");
-        // usedGuesses.innerHTML = typeGuess;
+
+        //Adds input key to Your Guesses
         var l = document.createElement('div');
         l.innerHTML = typeGuess;
         l.className = 'lblUsed';
         usedGuesses.appendChild(l);
         
+        //Evaluates key
         for (var i=0; i < randomWord.length; i++) {
+
+            //If key matches a string in the puzzle, reveal string
             if (typeGuess === randomWord[i]) {
                 puzzle[i] = typeGuess;
             }
         }
+
+        var j = (randomWord.indexOf(typeGuess));
+        if (j === -1) {
+            userGuesses--; // This allows correct answers but subtracts the number of the string
+            totalGuesses.innerHTML = 'T-' + userGuesses;                
+        }
+
         //Displays a correctly guessed letter
         document.getElementById("currentWord").innerHTML = puzzle.join(" ");
     }
 
-// Holds total guesses
-function totalGuesses() {
-    var totalGuesses = document.getElementById('guessesRemaining');
-    totalGuesses.innerHTML = 'T-' + userGuesses;
-}
-
-// Holds current losses
-function currentLosses() {
-    var currentLosses = document.getElementById('totalLosses');
-    currentLosses.innerHTML = losses;
-}
-
-function currentWins() {
-    var currentWins = document.getElementById('totalWins');
-    currentWins.innerHTML = wins;
-}
-
 startGame();    
-newPuzzle();
-totalGuesses();
-currentWins();
-currentLosses();
-
 
 } //Closes window.onload function
