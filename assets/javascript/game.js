@@ -29,6 +29,7 @@ window.onload = function () {
 
     // GAME SOUNDS
     var rocketLaunch = new Audio('./assets/missile-launch.mp3');
+    rocketLaunch.volume = 0.2;
 
     // GET ELEMENTS
     var currentWord = document.getElementById('currentWord');
