@@ -152,10 +152,12 @@ h1, h3 {
 
 #destination {
     width: 85%;
+    margin-left: -20px;
     background-color: white;
-    border-radius: 15px;
-    padding: 15px;
+    padding: 15px 15px 50px 15px;
     border: 2px #ddd solid;
+    -webkit-transform: rotate(-1deg); /* Safari */
+    transform: rotate(-1deg);
 }
 
 /* Dynamically Generated Text */

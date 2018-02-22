@@ -103,6 +103,9 @@ window.onload = function () {
 
         // Win
         solved();
+
+        // Lose
+        lost();
     }
 
 // Function to check if player has solved puzzle
@@ -171,6 +174,35 @@ function solved() {
     }
 }
 
+// Function to check if player has lost puzzle
+function lost() {
+    if (userGuesses === 0) {
+        losses++;
+        totalLosses.innerHTML = losses;
+        console.log("Too bad");
+    }
+}
+
 startGame();
+
+// Did You Know? Typing effect
+// var t = 0;
+// var txt = 'Did you know?'
+// var speed = 50;
+
+// function typeWriter() {
+//     if (t < txt.length) {
+//         document.getElementById("demo").innerHTML += txt.charAt(t);
+//         t++;
+//         setTimeout(typeWriter, speed);
+//     }
+// }
+
+// function typeWriter(txt){
+//  var txt = "hello, world";
+// }
+
+// typeWriter(txt);
+
 
 } //Closes window.onload function
