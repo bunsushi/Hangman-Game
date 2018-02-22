@@ -150,6 +150,14 @@ h1, h3 {
     margin-top: 20px;
 }
 
+#destination {
+    width: 85%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px;
+    border: 2px #ddd solid;
+}
+
 /* Dynamically Generated Text */
 
 #currentWord {
