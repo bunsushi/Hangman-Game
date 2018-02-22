@@ -199,7 +199,7 @@ h1, h3 {
 }
 
 /* Puzzle Letter */
-.underscore {
+.space {
     display: inline-block;
     text-align: center;
     font-size: 16pt;
@@ -211,4 +211,8 @@ h1, h3 {
 
 .letter {
     border-bottom: solid #000 2px;
+}
+
+#currentWord-container {
+    margin: 0 auto;
 }

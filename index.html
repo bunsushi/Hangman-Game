@@ -26,36 +26,35 @@
     <div class="container-fluid">
         <div class="page-header">
             <h1>Get Spaced</h1>
-            <h3>Press any letter key to get started</h3>
+            <h3>Type or click any letter key to get started</h3>
         </div>
     </div>
 
-        <nav class="navbar">
-            <div class="container">
-                <ul class="nav nav-tabs navbar-right">
-                    <li role="presentation" class="active">
-                        <a href="#">HOME</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#">PLANETS_01</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#">SOLAR_SYSTEM_02</a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#">MILKY_WAY_03</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <nav class="navbar">
+        <div class="container">
+            <ul class="nav nav-tabs navbar-right">
+                <li role="presentation" class="active">
+                    <a href="#">PLANETS_01</a>
+                </li>
+                <li role="presentation">
+                    <a href="#">SOLAR_SYSTEM_02</a>
+                </li>
+                <li role="presentation">
+                    <a href="#">MILKY_WAY_03</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container game-folder">
         <div class="row game-folder-front">
             <div class="col-md-6">
                 <div class="hangman-paper">
-                        <img src="assets/images/astronaut.png" width=100% />
-                        <h3>Destination</h3>
-                        <div id="currentWord"></div>                  
+                    <img src="assets/images/astronaut.png" width=100% />
+                    <h3>Destination</h3>
+                    <div id="currentWord-container">
+                    <div id="currentWord"></div>
+                    </div>
                 </div>
             </div>
 
@@ -63,12 +62,12 @@
                 <div class="game-sticky">
                     <br>
                     <div id="btnLetter-container">
-                    <div id="playerGuesses"></div>
+                        <div id="playerGuesses"></div>
                     </div>
                     <h3>Your Guesses</h3>
                     <div id="lblUsed-container">
-                    <div id="usedGuesses"></div>
-                    </div>                    
+                        <div id="usedGuesses"></div>
+                    </div>
                     <h3>Guesses Remaining</h3>
                     <div id="guessesRemaining">Total guesses remaining</div>
                     <div class="row">
@@ -84,7 +83,7 @@
                 </div>
             </div>
             <p id="mission">Astronaut Candidate:</p>
-            <p id="name">Your Name</p>           
+            <p id="name">Your Name</p>
         </div>
         <!-- /.row -->
     </div>

@@ -47,6 +47,13 @@ function selectLetter(selected){
     for (var i = 0; i < randomWord.length; i++) {
         if (randomWord[i] == guess) document.getElementById('letter'+i).innerHTML = guess;
     }
+
+    var current = '';
+    for (var i=0; i < randomWord.length; i++) {
+        if (document.getElementById('letter'+i).innerHTML == '') current += ' ';
+        else current += document.getElementById('letter'+i).innerHTML;
+    }
+    if(current == randomWord) alert('Genius!'); //change alert to +1 on wins column and maybe reset
 }
 
 // New Puzzle creates underscores for a randomly generated word
@@ -58,14 +65,14 @@ function newPuzzle() {
     for (var i=0; i < randomWord.length; i++) {
         //Creates a "div" with the variable letter
         var letter = document.createElement('div');
-        //Assigns ID to underscore
+        //Assigns ID to space
         letter.id = 'letter' + i;
-        //Assigns class "underscore" to spaces
+        //Assigns class "space" to spaces
         if (randomWord[i] == ' ')
-        letter.className = 'underscore';
-        //Assings classes "underscore" and "letter" to letter characters in a string
+        letter.className = 'space';
+        //Assigns classes "space" and "letter" to letter characters in a string
         else
-        letter.className = 'underscore letter';
+        letter.className = 'space letter';
         //Displays letter
         // letter.innerHTML = randomWord[i];
         //Generates divs for every string in the array solarSystemItems
@@ -73,14 +80,16 @@ function newPuzzle() {
     }
 }
 
-// When the player presses a button that matches a string in the puzzle...
+// When the player types a button that matches a string in the puzzle...
 document.onkeydown = userGuess;
 function userGuess(input) {
-    console.log(input.key);
-   
+    // console.log(input.key);
+
+    var typeGuess = input.key.toUpperCase();
     for (var j = 0; j < randomWord.length; j++) {
-        if (input.key === randomWord[j]) {
-            alert(input.key);
+        if (typeGuess === randomWord[j]) {
+            // console.log(typeGuess);
+            document.getElementById('letter'+j).innerHTML = typeGuess;
         }
         }
     }
