@@ -16,9 +16,6 @@ window.onload = function () {
     // ALPHABET BUTTONS
     var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-    // Chooses a random word from the array planets
-    // var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
-
     // GLOBAL VARIABLES
     var maxGuesses = 10; //Max number of guesses
     var userGuesses = 0; // Number of remaining guesses
@@ -58,16 +55,16 @@ window.onload = function () {
         currentLosses.innerHTML = losses;
         destination.src = 'assets/images/astronaut.jpg'
 
-        // Clear your old guesses
+        // Clear old guesses
         usedGuesses.innerHTML = "";
 
-        // Clear your old puzzle
+        // Clear old puzzle
         puzzle = [];
 
-        // Generate a new random word
+        // Generate new random word
         randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
-        // Queue up a blank puzzle
+        // Queue up blank puzzle
         gameBoard();
     }
 
@@ -116,7 +113,7 @@ window.onload = function () {
         //Display a correctly guessed letter in puzzle
         currentWord.innerHTML = puzzle.join(" ");
 
-        //Hide alphabet button
+        //Hide alphabet button after guess
         for (var k = 0; k < button.length; k++) {
 
             //If guess matches a button in the alphabet, hide button
@@ -126,9 +123,13 @@ window.onload = function () {
         }
     }
 
+    // EVENT LISTENER
     document.onkeydown = function (input) {
         // If a game is finished, press any key to continue
+        // Note this includes any key, including sound!
         if (complete) {
+            playerGuesses.innerHTML = "";
+            makeAlphabet();
             newPuzzle();
             complete = false;
         } else {

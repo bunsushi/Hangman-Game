@@ -38,12 +38,25 @@ h1, h3 {
     padding: 15px 50px;
 }
 
+.nav-tabs li.active a:visited {
+    background-color: #A88148;
+    color: #000;
+    padding: 15px 50px;
+}
+
 .nav-tabs li.active a:hover {
-    background-color: #ca9b57;
+    background-color: #A88148;
     color: #000;    
 }
 
 .nav-tabs li a {
+    background-color: #ca9b57;
+    color: #000;
+    padding: 15px 50px;
+    border-bottom: 1px #ddd solid;    
+}
+
+.nav-tabs li a:visited {
     background-color: #ca9b57;
     color: #000;
     padding: 15px 50px;
@@ -203,10 +216,6 @@ h1, h3 {
     margin: 5px;
     border-radius: 50%;
     border: black 2px solid;
-}
-
-#lblUsed-container {
-    height: 40px;
 }
 
 .lblUsed {
