@@ -78,7 +78,7 @@ function blankPuzzle() {
 
         var puzzleText = "";
         for (var j = 0; j < puzzle.length; j++) {
-            puzzleText += puzzle[i];
+            puzzleText += puzzle[j];
         }
 
         currentWord.innerHTML = puzzleText;
