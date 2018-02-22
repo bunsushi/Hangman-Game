@@ -116,9 +116,13 @@ window.onload = function () {
         //Display a correctly guessed letter in puzzle
         currentWord.innerHTML = puzzle.join(" ");
 
-        //Hide alphabet button NOT WORKING
-        if (typeGuess === button) {
-            button.style.visibility = "hidden";
+        //Hide alphabet button
+        for (var k = 0; k < button.length; k++) {
+
+            //If guess matches a button in the alphabet, hide button
+            if (typeGuess === button[k].innerHTML) {
+                button[k].style.visibility = "hidden";
+            }
         }
     }
 
