@@ -19,6 +19,10 @@ var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 // Chooses a random word from the array planets
 var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
+var userGuesses = 10; // max number of guesses
+var wins = 0;
+var losses = 0;
+
 // Start game creates alphabet buttons
 function startGame() {
 
@@ -29,7 +33,7 @@ function startGame() {
         var l = document.createElement('div');
         l.innerHTML = alphabet[i];
         l.className = 'btnLetter';
-        l.onclick = function(){selectLetter(this); };
+        // l.onclick = function(){selectLetter(this); };
         playerGuesses.appendChild(l);
     }
 }
@@ -80,21 +84,38 @@ function newPuzzle() {
     }
 }
 
+function totalGuesses() {
+    var totalGuesses = document.getElementById('guessesRemaining');
+    totalGuesses.innerHTML = 'T-' + userGuesses;
+}
+
+function currentLosses() {
+    var currentLosses = document.getElementById('totalLosses');
+    currentLosses.innerHTML = losses;
+}
+
+function currentWins() {
+    var currentWins = document.getElementById('totalWins');
+    currentWins.innerHTML = wins;
+}
+
 // When the player types a button that matches a string in the puzzle...
 document.onkeydown = userGuess;
 function userGuess(input) {
-    // console.log(input.key);
 
     var typeGuess = input.key.toUpperCase();
     for (var j = 0; j < randomWord.length; j++) {
         if (typeGuess === randomWord[j]) {
-            // console.log(typeGuess);
             document.getElementById('letter'+j).innerHTML = typeGuess;
-        }
+        } else 
+        losses = userGuesses - 1; //this doesn't reduce losses
         }
     }
 
 startGame();    
 newPuzzle();
+totalGuesses();
+currentWins();
+currentLosses();
 
 } //Closes window.onload function

@@ -82,7 +82,7 @@ h1, h3 {
     right: 40px;
     font-family: 'Black Ops One', cursive;
     font-size: 30px;
-    text-transform: capitalize;
+    text-transform: uppercase;
     color: #000;
     opacity: .7;
 }
@@ -93,7 +93,7 @@ h1, h3 {
     right: 40px;
     font-family: 'Black Ops One', cursive;
     font-size: 30px;
-    text-transform: capitalize;
+    text-transform: uppercase;
     color: #000;
     opacity: .7;
 }
@@ -164,6 +164,10 @@ h1, h3 {
     margin-top: 40px;
 }
 
+.game-sticky h3 {
+    text-decoration: underline;
+}
+
 #btnLetter-container {
     padding: 15px;
 }
@@ -196,6 +200,11 @@ h1, h3 {
     height: 30px;
     padding: 2px;
     margin: 3px;
+}
+
+#guessesRemaining, #totalLosses, #totalWins {
+    font-size: 18pt;
+    font-family: 'Karla', sans-serif;
 }
 
 /* Puzzle Letter */
