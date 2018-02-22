@@ -27,6 +27,9 @@ window.onload = function () {
     var randomWord;
     var typeGuess;
 
+    // GAME SOUNDS
+    var rocketLaunch = new Audio('./assets/missile-launch.mp3');
+
     // GET ELEMENTS
     var currentWord = document.getElementById('currentWord');
     var totalGuesses = document.getElementById('guessesRemaining');
@@ -93,6 +96,7 @@ window.onload = function () {
         l.innerHTML = typeGuess;
         l.className = 'lblUsed';
         usedGuesses.appendChild(l);
+        // ATTN: DOES NOT PREVENT USER FROM GUESSING SAME LETTER TWICE
 
         //Evaluate guess
         for (var i = 0; i < randomWord.length; i++) {
@@ -150,6 +154,7 @@ window.onload = function () {
         if (answerArrayString.indexOf("_") === -1) {
             wins++;
             totalWins.innerHTML = wins;
+            rocketLaunch.play();
             complete = true;
             console.log('Hurrah');
 
