@@ -19,9 +19,11 @@ var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 // Chooses a random word from the array planets
 var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
-var userGuesses = 10; // max number of guesses
-var wins = 0;
+var userGuesses = 10; // Max number of guesses
+var wins = 0; // How many wins the player has
 var losses = 0;
+var puzzle = []; // Empty array stores player guesses
+var x;
 
 // Start game creates alphabet buttons
 function startGame() {
@@ -60,35 +62,36 @@ function selectLetter(selected){
     if(current == randomWord) alert('Genius!'); //change alert to +1 on wins column and maybe reset
 }
 
-// New Puzzle creates underscores for a randomly generated word
+// Generates blank underscores for a randomly selected puzzle word
 function newPuzzle() {
-    var currentWord = document.getElementById('currentWord');
-    currentWord.innerHTML = randomWord;
-
-    currentWord.innerHTML = ' ';
     for (var i=0; i < randomWord.length; i++) {
-        //Creates a "div" with the variable letter
-        var letter = document.createElement('div');
-        //Assigns ID to space
-        letter.id = 'letter' + i;
-        //Assigns class "space" to spaces
-        if (randomWord[i] == ' ')
-        letter.className = 'space';
-        //Assigns classes "space" and "letter" to letter characters in a string
-        else
-        letter.className = 'space letter';
-        //Displays letter
-        // letter.innerHTML = randomWord[i];
-        //Generates divs for every string in the array solarSystemItems
-        currentWord.appendChild(letter);
+        puzzle[i] = ("_");
     }
+
+    x = puzzle.join(" ");
+    document.getElementById("currentWord").innerHTML = x;
 }
 
+// Type puzzle
+document.onkeydown = function(input) {
+        var typeGuess = input.key.toUpperCase();
+        // console.log(typeGuess);
+        for (var i=0; i < randomWord.length; i++) {
+            if (typeGuess === randomWord[i]) {
+                puzzle[i] = typeGuess;
+            }
+        }
+
+        document.getElementById("currentWord").innerHTML = puzzle.join(" ");
+    }
+
+// Holds total guesses
 function totalGuesses() {
     var totalGuesses = document.getElementById('guessesRemaining');
     totalGuesses.innerHTML = 'T-' + userGuesses;
 }
 
+// Holds current losses
 function currentLosses() {
     var currentLosses = document.getElementById('totalLosses');
     currentLosses.innerHTML = losses;
@@ -99,23 +102,11 @@ function currentWins() {
     currentWins.innerHTML = wins;
 }
 
-// When the player types a button that matches a string in the puzzle...
-document.onkeydown = userGuess;
-function userGuess(input) {
-
-    var typeGuess = input.key.toUpperCase();
-    for (var j = 0; j < randomWord.length; j++) {
-        if (typeGuess === randomWord[j]) {
-            document.getElementById('letter'+j).innerHTML = typeGuess;
-        } else 
-        losses = userGuesses - 1; //this doesn't reduce losses
-        }
-    }
-
 startGame();    
 newPuzzle();
 totalGuesses();
 currentWins();
 currentLosses();
+
 
 } //Closes window.onload function
