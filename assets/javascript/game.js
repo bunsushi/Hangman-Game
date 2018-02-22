@@ -1,5 +1,6 @@
 window.onload = function() {
 
+// Array of words that can be randomly generated for puzzle
 var planets = [
     "mercury",
     "venus",
@@ -12,14 +13,14 @@ var planets = [
     "pluto",
 ];
 
+// Alphabet buttons for seeing available letter guesses and already guessed letters
 var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-// Chooses a random word from the array celestialBodies
-var randomWord = planets[Math.floor(Math.random() * planets.length)];
+// Chooses a random word from the array planets
+var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
+// Start game creates alphabet buttons
 function startGame() {
-    var currentWord = document.getElementById('currentWord');
-    currentWord.innerHTML = randomWord;
 
     var playerGuesses = document.getElementById('playerGuesses');
     var usedGuesses = document.getElementById('usedGuesses');
@@ -33,6 +34,7 @@ function startGame() {
     }
 }
 
+// Select letter hides alphabet button and generates player's guess under 'Your Guesses'
 function selectLetter(selected){
     selected.style.visibility = 'hidden';
 
@@ -40,11 +42,18 @@ function selectLetter(selected){
     l.innerHTML = selected.innerHTML;
     l.className = 'lblUsed';
     usedGuesses.appendChild(l);
+
+    var guess = selected.innerHTML;
+    for (var i = 0; i < randomWord.length; i++) {
+        if (randomWord[i] == guess) document.getElementById('letter'+i).innerHTML = guess;
+    }
 }
 
-startGame();
-
+// New Puzzle creates underscores for a randomly generated word
 function newPuzzle() {
+    var currentWord = document.getElementById('currentWord');
+    currentWord.innerHTML = randomWord;
+
     currentWord.innerHTML = ' ';
     for (var i=0; i < randomWord.length; i++) {
         //Creates a "div" with the variable letter
@@ -58,18 +67,13 @@ function newPuzzle() {
         else
         letter.className = 'underscore letter';
         //Displays letter
-        letter.innerHTML = randomWord[i];
+        // letter.innerHTML = randomWord[i];
         //Generates divs for every string in the array solarSystemItems
         currentWord.appendChild(letter);
     }
 }
 
-// ! Don't forget to make random not repeat itself through array //
-
-//When user types a key, check if key matches word
-//if matches, display letter
-//else remove letter from board and remove a life
-
+// When the player presses a button that matches a string in the puzzle...
 document.onkeydown = userGuess;
 function userGuess(input) {
     console.log(input.key);
@@ -81,6 +85,7 @@ function userGuess(input) {
         }
     }
 
+startGame();    
 newPuzzle();
 
 } //Closes window.onload function

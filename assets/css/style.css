@@ -78,8 +78,19 @@ h1, h3 {
 
 #mission {
     position: absolute;
+    bottom: 30px;
+    right: 40px;
+    font-family: 'Black Ops One', cursive;
+    font-size: 30px;
+    text-transform: capitalize;
+    color: #000;
+    opacity: .7;
+}
+
+#name {
+    position: absolute;
     bottom: 0;
-    right: 50px;
+    right: 40px;
     font-family: 'Black Ops One', cursive;
     font-size: 30px;
     text-transform: capitalize;
@@ -171,6 +182,10 @@ h1, h3 {
 .btnLetter:hover {
     cursor: pointer;
     background-color: lightgray;
+}
+
+#lblUsed-container {
+    height: 40px;
 }
 
 .lblUsed {
