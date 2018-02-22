@@ -1,6 +1,6 @@
 window.onload = function () {
 
-    // Array of words that can be randomly generated for puzzle
+    // WORD BANK
     var planets = [
         "mercury",
         "venus",
@@ -13,47 +13,32 @@ window.onload = function () {
         "pluto",
     ];
 
-    // Alphabet buttons for seeing available letter guesses and already guessed letters
+    // ALPHABET BUTTONS
     var alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
     // Chooses a random word from the array planets
-    var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
+    // var randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
-    // Global variables
+    // GLOBAL VARIABLES
     var maxGuesses = 10; //Max number of guesses
     var userGuesses = 0; // Number of remaining guesses
-    var wins = 0; // How many wins the player has
-    var losses = 0;
+    var wins = 0; // Number of wins
+    var losses = 0; // Number of losses
     var puzzle = []; // Empty array stores player guesses
+    var complete = false; // To reset the game
     var x;
+    var randomWord;
+    var typeGuess;
 
-    // Get elements
+    // GET ELEMENTS
     var totalGuesses = document.getElementById('guessesRemaining');
+    var playerGuesses = document.getElementById('playerGuesses');
+    var usedGuesses = document.getElementById('usedGuesses');
     var currentWins = document.getElementById('totalWins');
     var currentLosses = document.getElementById('totalLosses');
-
     var destination = document.getElementById('destination');
 
-    // Start game creates alphabet buttons
-    function startGame() {
-
-        var playerGuesses = document.getElementById('playerGuesses');
-        var usedGuesses = document.getElementById('usedGuesses');
-        // var totalGuesses = document.getElementById('guessesRemaining');
-
-
-        userGuesses = maxGuesses;
-
-        totalGuesses.innerHTML = 'T-' + userGuesses;
-        currentWins.innerHTML = wins;
-        currentLosses.innerHTML = losses;
-
-        makeAlphabet();
-        newPuzzle();
-
-    }
-
-    // Generate alphabet buttons
+    // GENERATE ALPHABET BUTTONS
     function makeAlphabet() {
         for (var i = 0; i < alphabet.length; i++) {
             var l = document.createElement('div');
@@ -63,8 +48,20 @@ window.onload = function () {
         }
     }
 
-    // Generates blank underscores for a randomly selected puzzle word
+    // GENERATE NEW PUZZLE
     function newPuzzle() {
+        userGuesses = maxGuesses;
+        totalGuesses.innerHTML = 'T-' + userGuesses;
+        currentWins.innerHTML = wins;
+        currentLosses.innerHTML = losses;
+        destination.src = 'assets/images/astronaut.jpg'
+
+        randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
+
+        // Clear your old guesses
+        // BUG: if previous puzzle is longer, adds the extra letters
+
+        // Generate puzzle blanks
         for (var i = 0; i < randomWord.length; i++) {
             puzzle[i] = ("_");
         }
@@ -72,10 +69,8 @@ window.onload = function () {
         document.getElementById("currentWord").innerHTML = x;
     }
 
-    // Type puzzle
-    // ! Restrict input to alphabet letters only!
-    document.onkeydown = function (input) {
-        var typeGuess = input.key.toUpperCase();
+    //MAKE A GUESS
+    function makeGuess() {
 
         //Adds input key to Your Guesses
         var l = document.createElement('div');
@@ -92,117 +87,113 @@ window.onload = function () {
             }
         }
 
+        //If key does not match a string in the puzzle, subtracts a guess
         var j = (randomWord.indexOf(typeGuess));
         if (j === -1) {
-            userGuesses--; // This allows correct answers but subtracts the number of the string
+            userGuesses--;
             totalGuesses.innerHTML = 'T-' + userGuesses;
         }
 
-        //Displays a correctly guessed letter
+        //Displays a correctly guessed letter in puzzle
         document.getElementById("currentWord").innerHTML = puzzle.join(" ");
-
-        // Win
-        solved();
-
-        // Lose
-        lost();
     }
 
-// Function to check if player has solved puzzle
-function solved() {
-    var answerArrayString = puzzle.toString();
-    if (answerArrayString.indexOf("_") === -1) {
-        wins++;
-        totalWins.innerHTML = wins; //ATTN: if user types another character, adds to wins col
-        //Restart game, okay?
-        console.log('Hurrah');
-
-        if (randomWord === "MERCURY") {
-            console.log("Mercury");
-            //display picture of Mercury
-            destination.src='assets/images/mercury.jpg';
+    document.onkeydown = function (input) {
+        // If a game is finished, press any key to continue
+        if (complete) {
+            newPuzzle();
+            complete = false;
+        } else {
+            // Restrict allowed keys to A-Z
+            if (input.keyCode >= 65 && input.keyCode <= 90) {
+                console.log(input.key);
+                typeGuess = input.key.toUpperCase();
+                makeGuess(typeGuess);
+                solved(); // Checks if player won
+                lost(); // Checks if player lost
+            }
         }
-
-        if (randomWord === "VENUS") {
-            console.log("Venus");
-            //display picture of Venus
-            destination.src='assets/images/venus.jpg';
-        }
-
-        if (randomWord === "EARTH") {
-            console.log("Earth");
-            //display picture of Earth
-            destination.src='assets/images/earth.jpg';
-        }
-
-        if (randomWord === "MARS") {
-            console.log("Mars");
-            //display picture of Mars
-            destination.src='assets/images/mars.jpg';
-        }
-
-        if (randomWord === "JUPITER") {
-            console.log("Jupiter");
-            //display picture of Jupiter
-            destination.src='assets/images/jupiter.jpg';
-        }
-
-        if (randomWord === "SATURN") {
-            console.log("Saturn");
-            //display picture of Saturn
-            destination.src='assets/images/saturn.jpg';
-        }
-
-        if (randomWord === "URANUS") {
-            console.log("Uranus");
-            //display picture of Uranus
-            destination.src='assets/images/uranus.jpg';
-        }
-
-        if (randomWord === "NEPTUNE") {
-            console.log("Neptune");
-            //display picture of Neptune
-            destination.src='assets/images/neptune.jpg';
-        }
-
-        if (randomWord === "PLUTO") {
-            console.log("Pluto");
-            //display picture of Pluto
-            destination.src='assets/images/pluto.jpg';
-        }
-
     }
-}
 
-// Function to check if player has lost puzzle
-function lost() {
-    if (userGuesses === 0) {
-        losses++;
-        totalLosses.innerHTML = losses;
-        console.log("Too bad");
+    // WIN CONDITIONS
+    function solved() {
+        var answerArrayString = puzzle.toString();
+        if (answerArrayString.indexOf("_") === -1) {
+            wins++;
+            totalWins.innerHTML = wins; //ATTN: if user types another character, adds to wins col
+            //Restart game, okay?
+            complete = true;
+            console.log('Hurrah');
+
+            if (randomWord === "MERCURY") {
+                console.log("Mercury");
+                //display picture of Mercury
+                destination.src = 'assets/images/mercury.jpg';
+            }
+
+            if (randomWord === "VENUS") {
+                console.log("Venus");
+                //display picture of Venus
+                destination.src = 'assets/images/venus.jpg';
+            }
+
+            if (randomWord === "EARTH") {
+                console.log("Earth");
+                //display picture of Earth
+                destination.src = 'assets/images/earth.jpg';
+            }
+
+            if (randomWord === "MARS") {
+                console.log("Mars");
+                //display picture of Mars
+                destination.src = 'assets/images/mars.jpg';
+            }
+
+            if (randomWord === "JUPITER") {
+                console.log("Jupiter");
+                //display picture of Jupiter
+                destination.src = 'assets/images/jupiter.jpg';
+            }
+
+            if (randomWord === "SATURN") {
+                console.log("Saturn");
+                //display picture of Saturn
+                destination.src = 'assets/images/saturn.jpg';
+            }
+
+            if (randomWord === "URANUS") {
+                console.log("Uranus");
+                //display picture of Uranus
+                destination.src = 'assets/images/uranus.jpg';
+            }
+
+            if (randomWord === "NEPTUNE") {
+                console.log("Neptune");
+                //display picture of Neptune
+                destination.src = 'assets/images/neptune.jpg';
+            }
+
+            if (randomWord === "PLUTO") {
+                console.log("Pluto");
+                //display picture of Pluto
+                destination.src = 'assets/images/pluto.jpg';
+            }
+
+        }
     }
-}
 
-startGame();
+    // LOSS CONDITIONS
+    function lost() {
+        if (userGuesses <= 0) {
+            losses++;
+            totalLosses.innerHTML = losses;
+            complete = true;
+            console.log("Too bad");
+        }
+    }
 
-// Did You Know? Typing effect
-// var t = 0;
-// var txt = 'Did you know?'
-// var speed = 50;
-
-// function typeWriter() {
-//     if (t < txt.length) {
-//         document.getElementById("demo").innerHTML += txt.charAt(t);
-//         t++;
-//         setTimeout(typeWriter, speed);
-//     }
-// }
-
-// function typeWriter(txt){
-//  var txt = "hello, world";
-// }
-
-// typeWriter(txt);
+    makeAlphabet();
+    newPuzzle();
 
 
 } //Closes window.onload function
