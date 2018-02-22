@@ -31,6 +31,7 @@ window.onload = function () {
     var typeGuess;
 
     // GET ELEMENTS
+    var currentWord = document.getElementById('currentWord');
     var totalGuesses = document.getElementById('guessesRemaining');
     var playerGuesses = document.getElementById('playerGuesses');
     var usedGuesses = document.getElementById('usedGuesses');
@@ -56,18 +57,32 @@ window.onload = function () {
         currentLosses.innerHTML = losses;
         destination.src = 'assets/images/astronaut.jpg'
 
+        // Clear your old guesses
+        usedGuesses.innerHTML = "";
+
+        // Clear your old puzzle
+        puzzle = [];
+
+        // Generate a new random word
         randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
-        // Clear your old guesses
-        // BUG: if previous puzzle is longer, adds the extra letters
+        blankPuzzle();
+    }
 
+// BUG: puzzle starts undefined
+function blankPuzzle() {
         // Generate puzzle blanks
         for (var i = 0; i < randomWord.length; i++) {
-            puzzle[i] = ("_");
+            puzzle.push("_");
         }
-        x = puzzle.join(" ");
-        document.getElementById("currentWord").innerHTML = x;
-    }
+
+        var puzzleText = "";
+        for (var j = 0; j < puzzle.length; j++) {
+            puzzleText += puzzle[i];
+        }
+
+        currentWord.innerHTML = puzzleText;
+}
 
     //MAKE A GUESS
     function makeGuess() {
@@ -95,7 +110,7 @@ window.onload = function () {
         }
 
         //Displays a correctly guessed letter in puzzle
-        document.getElementById("currentWord").innerHTML = puzzle.join(" ");
+        currentWord.innerHTML = puzzle.join(" ");
     }
 
     document.onkeydown = function (input) {
