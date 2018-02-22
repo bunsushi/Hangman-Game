@@ -41,33 +41,32 @@ function startGame() {
 }
 
 // Select letter hides alphabet button and generates player's guess under 'Your Guesses'
-function selectLetter(selected){
-    selected.style.visibility = 'hidden';
+// function selectLetter(selected){
+//     selected.style.visibility = 'hidden';
 
-    var l = document.createElement('div');
-    l.innerHTML = selected.innerHTML;
-    l.className = 'lblUsed';
-    usedGuesses.appendChild(l);
+//     var l = document.createElement('div');
+//     l.innerHTML = selected.innerHTML;
+//     l.className = 'lblUsed';
+//     usedGuesses.appendChild(l);
 
-    var guess = selected.innerHTML;
-    for (var i = 0; i < randomWord.length; i++) {
-        if (randomWord[i] == guess) document.getElementById('letter'+i).innerHTML = guess;
-    }
+//     var guess = selected.innerHTML;
+//     for (var i = 0; i < randomWord.length; i++) {
+//         if (randomWord[i] == guess) document.getElementById('letter'+i).innerHTML = guess;
+//     }
 
-    var current = '';
-    for (var i=0; i < randomWord.length; i++) {
-        if (document.getElementById('letter'+i).innerHTML == '') current += ' ';
-        else current += document.getElementById('letter'+i).innerHTML;
-    }
-    if(current == randomWord) alert('Genius!'); //change alert to +1 on wins column and maybe reset
-}
+//     var current = '';
+//     for (var i=0; i < randomWord.length; i++) {
+//         if (document.getElementById('letter'+i).innerHTML == '') current += ' ';
+//         else current += document.getElementById('letter'+i).innerHTML;
+//     }
+//     if(current == randomWord) alert('Genius!'); //change alert to +1 on wins column and maybe reset
+// }
 
 // Generates blank underscores for a randomly selected puzzle word
 function newPuzzle() {
     for (var i=0; i < randomWord.length; i++) {
         puzzle[i] = ("_");
     }
-
     x = puzzle.join(" ");
     document.getElementById("currentWord").innerHTML = x;
 }
@@ -76,12 +75,19 @@ function newPuzzle() {
 document.onkeydown = function(input) {
         var typeGuess = input.key.toUpperCase();
         // console.log(typeGuess);
+        // var usedGuesses = document.getElementById("usedGuesses");
+        // usedGuesses.innerHTML = typeGuess;
+        var l = document.createElement('div');
+        l.innerHTML = typeGuess;
+        l.className = 'lblUsed';
+        usedGuesses.appendChild(l);
+        
         for (var i=0; i < randomWord.length; i++) {
             if (typeGuess === randomWord[i]) {
                 puzzle[i] = typeGuess;
             }
         }
-
+        //Displays a correctly guessed letter
         document.getElementById("currentWord").innerHTML = puzzle.join(" ");
     }
 

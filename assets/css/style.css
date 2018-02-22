@@ -150,9 +150,16 @@ h1, h3 {
     margin-top: 20px;
 }
 
+/* Dynamically Generated Text */
+
 #currentWord {
     font-size: 24pt;
     padding: 20px;
+}
+
+#usedGuesses {
+    display: inline-block;
+    font-size: 18pt;
 }
 
 /* Game Sticky Note Panel */
