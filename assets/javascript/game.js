@@ -38,6 +38,7 @@ window.onload = function () {
     var currentWins = document.getElementById('totalWins');
     var currentLosses = document.getElementById('totalLosses');
     var destination = document.getElementById('destination');
+    var button = document.getElementsByClassName('btnLetter');
 
     // GENERATE ALPHABET BUTTONS
     function makeAlphabet() {
@@ -66,51 +67,59 @@ window.onload = function () {
         // Generate a new random word
         randomWord = planets[Math.floor(Math.random() * planets.length)].toUpperCase();
 
-        blankPuzzle();
+        // Queue up a blank puzzle
+        gameBoard();
     }
 
-// BUG: puzzle starts undefined
-function blankPuzzle() {
+    // GENERATE GAME BOARD
+    function gameBoard() {
         // Generate puzzle blanks
         for (var i = 0; i < randomWord.length; i++) {
-            puzzle.push("_");
+            puzzle.push(" _ ");
         }
 
+        // String the (" _ ") together
         var puzzleText = "";
         for (var j = 0; j < puzzle.length; j++) {
             puzzleText += puzzle[j];
         }
 
+        // Display the puzzle blanks
         currentWord.innerHTML = puzzleText;
-}
+    }
 
     //MAKE A GUESS
     function makeGuess() {
 
-        //Adds input key to Your Guesses
+        //Add typed letter guess to Your Guesses
         var l = document.createElement('div');
         l.innerHTML = typeGuess;
         l.className = 'lblUsed';
         usedGuesses.appendChild(l);
 
-        //Evaluates key
+        //Evaluate guess
         for (var i = 0; i < randomWord.length; i++) {
 
-            //If key matches a string in the puzzle, reveal string
+            //If guess matches a string in the puzzle, reveal string
             if (typeGuess === randomWord[i]) {
                 puzzle[i] = typeGuess;
             }
         }
 
-        //If key does not match a string in the puzzle, subtracts a guess
+        //If key does not match a string in the puzzle, subtract a guess
         var j = (randomWord.indexOf(typeGuess));
         if (j === -1) {
             userGuesses--;
             totalGuesses.innerHTML = 'T-' + userGuesses;
         }
 
-        //Displays a correctly guessed letter in puzzle
+        //Display a correctly guessed letter in puzzle
         currentWord.innerHTML = puzzle.join(" ");
+
+        //Hide alphabet button NOT WORKING
+        if (typeGuess === button) {
+            button.style.visibility = "hidden";
+        }
     }
 
     document.onkeydown = function (input) {
