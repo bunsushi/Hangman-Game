@@ -135,8 +135,7 @@ function blankPuzzle() {
         var answerArrayString = puzzle.toString();
         if (answerArrayString.indexOf("_") === -1) {
             wins++;
-            totalWins.innerHTML = wins; //ATTN: if user types another character, adds to wins col
-            //Restart game, okay?
+            totalWins.innerHTML = wins;
             complete = true;
             console.log('Hurrah');
 
@@ -197,13 +196,67 @@ function blankPuzzle() {
         }
     }
 
-    // LOSS CONDITIONS
+    // LOSE CONDITIONS
     function lost() {
         if (userGuesses <= 0) {
             losses++;
             totalLosses.innerHTML = losses;
             complete = true;
             console.log("Too bad");
+
+            if (randomWord === "MERCURY") {
+                console.log("Mercury");
+                //display picture of Mercury
+                destination.src = 'assets/images/mercury.jpg';
+            }
+
+            if (randomWord === "VENUS") {
+                console.log("Venus");
+                //display picture of Venus
+                destination.src = 'assets/images/venus.jpg';
+            }
+
+            if (randomWord === "EARTH") {
+                console.log("Earth");
+                //display picture of Earth
+                destination.src = 'assets/images/earth.jpg';
+            }
+
+            if (randomWord === "MARS") {
+                console.log("Mars");
+                //display picture of Mars
+                destination.src = 'assets/images/mars.jpg';
+            }
+
+            if (randomWord === "JUPITER") {
+                console.log("Jupiter");
+                //display picture of Jupiter
+                destination.src = 'assets/images/jupiter.jpg';
+            }
+
+            if (randomWord === "SATURN") {
+                console.log("Saturn");
+                //display picture of Saturn
+                destination.src = 'assets/images/saturn.jpg';
+            }
+
+            if (randomWord === "URANUS") {
+                console.log("Uranus");
+                //display picture of Uranus
+                destination.src = 'assets/images/uranus.jpg';
+            }
+
+            if (randomWord === "NEPTUNE") {
+                console.log("Neptune");
+                //display picture of Neptune
+                destination.src = 'assets/images/neptune.jpg';
+            }
+
+            if (randomWord === "PLUTO") {
+                console.log("Pluto");
+                //display picture of Pluto
+                destination.src = 'assets/images/pluto.jpg';
+            }
         }
     }
 
